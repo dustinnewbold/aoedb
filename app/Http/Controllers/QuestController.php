@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Zone;
 use App\Models\Quest;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
 
-class ZoneController extends Controller
+class QuestController extends Controller
 {
 	/**
 	 * Display a listing of the resource.
@@ -17,29 +16,8 @@ class ZoneController extends Controller
 	 */
 	public function index()
 	{
-		$zones = Zone::with('zoneType')->get();
-
-		$world = array();
-		$dungeons = array();
-
-		// Arrange zones by type
-		foreach ( $zones as $zone ) {
-			switch ( $zone->zoneType->name ) {
-				case 'World':
-					$world[] = $zone;
-					break;
-
-				case 'Dungeon':
-					$dungeons[] = $zone;
-					break;
-			}
-		}
-
-		return view('zones.index', [
-			compact('zones'),
-			'world' => $world,
-			'dungeons' => $dungeons
-		]);
+		//
+		return view('quests.index');
 	}
 
 	/**
@@ -69,19 +47,10 @@ class ZoneController extends Controller
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function show($id, $name)
+	public function show($id)
 	{
-		$zone = Zone::with(['quests', 'quests.npc'])->find($id);
-
-		// TODO: Set up translation
-		$zone->name = $zone->name_en;
-		$zone->description = $zone->description_en;
-
-		if ( $name != str_replace(' ', '_', strtolower($zone->name)) ) {
-			dd('Wrong place, wrong time');
-		}
-
-		return view('zones.show', ['zone' => $zone]);
+		$quest = Quest::with(['zone', 'npc'])->find($id);
+		return view('quests.show', ['quest' => $quest]);
 	}
 
 	/**

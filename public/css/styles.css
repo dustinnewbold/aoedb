@@ -46,7 +46,7 @@ a {
 	cursor: pointer;
 }
 
-.menu li:first-child,
+.menu li.active,
 .menu li:hover {
 	background: #333;
 }
@@ -104,4 +104,8 @@ a {
 
 .data tr:nth-child(2n+1) {
 	background: #000;
+}
+
+.hide {
+	display: none !important;
 }
