@@ -18,7 +18,7 @@
 	<ul class="menu">
 		<li>
 			<a href="#">
-				Zones
+				World
 			</a>
 		</li>
 		<li>
@@ -51,49 +51,18 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>
-						<a href="/zones/12/Example Zone/">
-							Example Zone A
-						</a>
-					</td>
-					<td>
-						Some Continent
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<a href="/zones/12/Example Zone/">
-							Example Zone B
-						</a>
-					</td>
-					<td>
-						Some Continent
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<a href="/zones/12/Example Zone/">
-							Example Zone C
-						</a>
-					</td>
-					<td>
-						Some Continent
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<a href="/zones/12/Example Zone/">
-							Example Zone D
-						</a>
-					</td>
-					<td>
-						Some Continent
-					</td>
-				</tr>
-
-				
-
+				@foreach ( $zones as $zone )
+					<tr>
+						<td>
+							<a href="/zones/{{ $zone->id }}/{{ str_replace(' ', '_', $zone->name_en) }}/">
+								{{ $zone->name_en }}
+							</a>
+						</td>
+						<td>
+							Some Continent
+						</td>
+					</tr>
+				@endforeach
 			</tbody>
 		</table>
 	</div>

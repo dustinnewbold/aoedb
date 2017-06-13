@@ -23,10 +23,6 @@ Route::get('/search', function () {
 	return view('search');
 });
 
-Route::get('/zones', function() {
-	return view('zones.index');
-});
+Route::get('/zones/{id}/{name}/', 'ZoneController@show');
 
-Route::get('/zones/{id}/{name}/', function() {
-	return view('zones.view', ['comments' => true]);
-});
+Route::resource('zones', 'ZoneController', ['except' => ['show']]);
